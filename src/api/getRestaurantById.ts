@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function getRestaurantById(id) {
+export default async function getRestaurantById(id: string) {
   const res = await axios.get(
     `https://685ac7619f6ef9611157c1d3.mockapi.io/restaurants/${id}`,
   );

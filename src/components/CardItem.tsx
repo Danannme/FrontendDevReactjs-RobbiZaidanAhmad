@@ -43,7 +43,7 @@ export default function CardItem({ item }: { item: Restaurant }) {
           </div>
           <div className="flex gap-1 text-sm items-center">
             <div
-              class={`w-2 h-2 ${item.open == true ? "bg-green-500" : "bg-red-500"} rounded-full`}
+              className={`w-2 h-2 ${item.open == true ? "bg-green-500" : "bg-red-500"} rounded-full`}
             ></div>{" "}
             OPEN NOW
           </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 //types
 import type { Restaurant } from "../types/types.ts";
 
-export default async function getRestaurantByCategory(category) {
+export default async function getRestaurantByCategory(category: string) {
   const res = await axios.get<Restaurant[]>(
     "https://685ac7619f6ef9611157c1d3.mockapi.io/restaurants",
   );

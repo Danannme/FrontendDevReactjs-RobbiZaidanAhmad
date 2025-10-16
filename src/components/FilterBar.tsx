@@ -1,14 +1,12 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 
 // components
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -18,8 +16,19 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
 import getCategories from "../api/getCategories.ts";
 
-export default function FilterBar({ onFilterChange }) {
-  const [filters, setFilters] = useState({
+// types
+interface Filters {
+  openNow: boolean;
+  price: string;
+  category: string;
+}
+
+interface FiltersBarProp {
+  onFilterChange: (filters: Filters) => void;
+}
+
+export default function FilterBar({ onFilterChange }: FiltersBarProp) {
+  const [filters, setFilters] = useState<Filters>({
     openNow: false,
     price: "",
     category: "",
@@ -32,7 +41,7 @@ export default function FilterBar({ onFilterChange }) {
   });
 
   // function to changne filters value
-  const handleChange = (key, value) => {
+  const handleChange = (key: keyof Filters, value: string | boolean) => {
     const newFilters = { ...filters, [key]: value };
     setFilters(newFilters);
     onFilterChange?.(newFilters);
@@ -67,7 +76,7 @@ export default function FilterBar({ onFilterChange }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                variant=""
+                variant="default"
                 className="cursor-pointer bg-white text-black hover:bg-white bg:text-black border-b-2 rounded-none shadow-none focus-visible:ring-0"
               >
                 Price
@@ -90,7 +99,7 @@ export default function FilterBar({ onFilterChange }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                variant=""
+                variant="default"
                 className="cursor-pointer bg-white text-black hover:bg-white bg:text-black border-b-2 rounded-none shadow-none focus-visible:ring-0"
               >
                 Categories
@@ -103,7 +112,7 @@ export default function FilterBar({ onFilterChange }) {
                 onValueChange={(value) => handleChange("category", value)}
               >
                 {isLoading == false &&
-                  categories.map((item) => (
+                  categories?.map((item) => (
                     <DropdownMenuRadioItem value={item}>
                       {item}
                     </DropdownMenuRadioItem>

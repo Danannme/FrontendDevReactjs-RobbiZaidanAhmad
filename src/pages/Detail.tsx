@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
 
 // tanstack
 import { useQuery } from "@tanstack/react-query";
 import getRestaurantById from "../api/getRestaurantById.ts";
+
+// types
+import type { Review } from "../types/types.ts";
 
 export default function Detail() {
   const { id } = useParams(); // get is from url params
@@ -11,7 +13,7 @@ export default function Detail() {
   // get restaurant data by id
   const { data: restaurant, isLoading } = useQuery({
     queryKey: ["restaurant", id],
-    queryFn: () => getRestaurantById(id),
+    queryFn: () => getRestaurantById(id!),
   });
 
   if (isLoading) {
@@ -76,9 +78,9 @@ export default function Detail() {
       {/* Reviews */}
       <div className="mt-10">
         <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
-        {reviews && reviews.length > 0 ? (
+        {reviews && reviews?.length > 0 ? (
           <div className="space-y-4">
-            {reviews.map((review) => (
+            {reviews.map((review: Review) => (
               <div
                 key={review.id}
                 className="flex gap-2 items-center border border-gray-200 rounded-lg p-4 shadow-sm"
