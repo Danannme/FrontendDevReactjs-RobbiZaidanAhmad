@@ -58,8 +58,8 @@ export default function FilterBar({ onFilterChange }: FiltersBarProp) {
     <div>
       {/* // filter bar container */}
       <Separator /> {/* horizontal line */}
-      <div className="w-full flex items-center justify-between">
-        <div className="flex gap-3 my-4 px-10 items-center">
+      <div className="w-full flex flex-wrap my-4 px-10 gap-3 items-center justify-between">
+        <div className="flex flex-wrap gap-3 items-center">
           <span>Filter By:</span>
           {/* open now filter */}
           <Button className="cursor-pointer bg-white text-black hover:bg-white bg:text-black border-b-2 rounded-none shadow-none focus-visible:ring-0">
@@ -126,7 +126,7 @@ export default function FilterBar({ onFilterChange }: FiltersBarProp) {
         <Button
           onClick={clearFilters}
           variant="outline"
-          className="cursor-pointer mx-10 rounded-xs"
+          className="cursor-pointer rounded-xs"
         >
           Clear All
         </Button>
